@@ -1,5 +1,6 @@
 package com.example.mysqlproject;
 
+import com.example.mysqlproject.dao.ProfileService;
 import com.example.mysqlproject.model.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -11,32 +12,35 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import java.util.List;
 
 @SpringBootApplication
-public class MysqlprojectApplication implements CommandLineRunner{
+public class MysqlprojectApplication {
 
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
+	private ProfileService profileService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(MysqlprojectApplication.class, args);
 	}
 
-	@Override
+	/*@Override
 	public void run(String... strings) throws Exception {
-/*		String sql = "INSERT into profile(name, fname, age) VALUES(?, ?, ?)";
 
-		int result = jdbcTemplate.update(sql, "Abel", "Tadesse", 29);
+		Profile newProfile = new Profile();
+		newProfile.setName("Dembitu");
+		newProfile.setFname("Hambisa");
+		newProfile.setAge(18);
+
+		int result = profileService.saveProfile(newProfile);
 
 		if(result > 0){
 			System.out.println("A new row inserted");
-		}*/
+		}
 
 
 		String selectSql = "SELECT * FROM profile";
+		List<Profile> profiles = profileService.profileList(selectSql);
 
-		List<Profile> profileList = jdbcTemplate.query(selectSql, new BeanPropertyRowMapper(Profile.class));
-
-		if(profileList != null){
+		if(profiles != null){
 			System.out.println("List of Customer profiles are");
 		}
-	}
+	}*/
 }
